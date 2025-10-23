@@ -233,45 +233,46 @@ const postFillPdf = async (req,res) => {
     res.status(500).send('Errore nel riempimento del PDF');
   }
 };
-const createAnagraficaConDocumenti = (dataAnagrafica, dataDocumenti) => {
-  return new Promise((resolve, reject) => {
-    db.run('BEGIN TRANSACTION', (err) => {
-      if (err) {
-        return reject(err);
-      }
+// const createAnagraficaConDocumenti = (dataAnagrafica, dataDocumenti) => {
+//   return new Promise((resolve, reject) => {
+//     db.run('BEGIN TRANSACTION', (err) => {
+//       if (err) {
+//         return reject(err);
+//       }
 
-      // Prima insert: anagrafica
+//       // Prima insert: anagrafica
      
-      insertAnagrafica(dataAnagrafica)
-        .then((resultAnagrafica) => {
-          // Se OK, seconda insert: documenti (passa l'ID anagrafica se necessario)
-          return insertDocumento(dataDocumenti, resultAnagrafica.id)
-            .then((resultDocumenti) => {
-              // Tutto OK: commit
-              db.run('COMMIT', (commitErr) => {
-                if (commitErr) {
-                  reject(commitErr);
-                } else {
-                  resolve({
-                    message: 'Inserimento completato',
-                    anagrafica: resultAnagrafica,
-                    documenti: resultDocumenti
-                  });
-                }
-              });
-            });
-        })
-        .catch((err) => {
-          // Errore in una delle insert: rollback
-          db.run('ROLLBACK', (rollbackErr) => {
-            if (rollbackErr) {
-              console.error('Errore durante rollback:', rollbackErr);
-            }
-            reject(err); // Rifiuta con l'errore originale
-          });
-        });
+//       insertAnagrafica(dataAnagrafica)
+//         .then((resultAnagrafica) => {
+//           // Se OK, seconda insert: documenti (passa l'ID anagrafica se necessario)
+//           return insertDocumento(dataDocumenti, resultAnagrafica.id)
+//             .then((resultDocumenti) => {
+//               // Tutto OK: commit
+//               db.run('COMMIT', (commitErr) => {
+//                 if (commitErr) {
+//                   reject(commitErr);
+//                 } else {
+//                   resolve({
+//                     message: 'Inserimento completato',
+//                     anagrafica: resultAnagrafica,
+//                     documenti: resultDocumenti
+//                   });
+//                 }
+//               });
+//             });
+//         })
+//         .catch((err) => {
+//           // Errore in una delle insert: rollback
+//           db.run('ROLLBACK', (rollbackErr) => {
+//             if (rollbackErr) {
+//               console.error('Errore durante rollback:', rollbackErr);
+//             }
+//             reject(err); // Rifiuta con l'errore originale
+//           });
+//         });
     
-    });
-  });
-}
-module.exports = { getAnag_Azienda, getAnag_AziendaById , getDocumentiById, postFillPdf,insertAnagrafica, insertDocumento, createAnagraficaConDocumenti };
+//     });
+//   });
+// }
+// module.exports = { getAnag_Azienda, getAnag_AziendaById , getDocumentiById, postFillPdf,insertAnagrafica, insertDocumento, createAnagraficaConDocumenti };
+module.exports = {  postFillPdf };
