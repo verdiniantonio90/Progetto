@@ -2,104 +2,104 @@ const sqlite3 = require('sqlite3').verbose();
 const fs = require('fs').promises;
 const { PDFDocument, StandardFonts, rgb } = require('pdf-lib');
 // const cors = require('cors');
-const db = new sqlite3.Database('./DbAnagrafica.db', (err) => {
-  if (err) {
-    console.error('Errore di connessione al database:', err.message);
-  } else {
-    console.log('Connesso al database SQLite');
-  }
-});
-const getAnag_Azienda = () => {
-  return new Promise((resolve, reject) => {
-    var response;
-    const sql = 'SELECT * FROM ANAG_AZIENDA';
-    db.all(sql, [], (err, rows) => {
-      if (err) {
-        reject(err);
-      } else {
-        response = rows
-        resolve(rows);
-      }
-    });
-  });
-}
-const getAnag_AziendaById = (id) => {
-  return new Promise((resolve, reject) => {
-    const sql = 'SELECT * FROM utenti WHERE id = ?';
-    db.get(sql, [id], (err, row) => {
-      if (err) {
-        reject(err);
-      } else {
-        resolve(row);
-      }
-    });
-  });
-};
-const getDocumentiById = (id) => {
+// const db = new sqlite3.Database('./DbAnagrafica.db', (err) => {
+//   if (err) {
+//     console.error('Errore di connessione al database:', err.message);
+//   } else {
+//     console.log('Connesso al database SQLite');
+//   }
+// });
+// const getAnag_Azienda = () => {
+//   return new Promise((resolve, reject) => {
+//     var response;
+//     const sql = 'SELECT * FROM ANAG_AZIENDA';
+//     db.all(sql, [], (err, rows) => {
+//       if (err) {
+//         reject(err);
+//       } else {
+//         response = rows
+//         resolve(rows);
+//       }
+//     });
+//   });
+// }
+// const getAnag_AziendaById = (id) => {
+//   return new Promise((resolve, reject) => {
+//     const sql = 'SELECT * FROM utenti WHERE id = ?';
+//     db.get(sql, [id], (err, row) => {
+//       if (err) {
+//         reject(err);
+//       } else {
+//         resolve(row);
+//       }
+//     });
+//   });
+// };
+// const getDocumentiById = (id) => {
   
-  return new Promise((resolve, reject) => {
-    const sql = `SELECT * FROM documenti WHERE documenti.fk_id = ?`;
-    db.all(sql, [id], (err, rows) => {
-      if (err) {
-        reject(err);
-      } else {
-        resolve(rows);
-      }
-    });
-  });
-}
-const insertAnagrafica = (req,res) => {
-  return new Promise((resolve, reject) => {
+//   return new Promise((resolve, reject) => {
+//     const sql = `SELECT * FROM documenti WHERE documenti.fk_id = ?`;
+//     db.all(sql, [id], (err, rows) => {
+//       if (err) {
+//         reject(err);
+//       } else {
+//         resolve(rows);
+//       }
+//     });
+//   });
+// }
+// const insertAnagrafica = (req,res) => {
+//   return new Promise((resolve, reject) => {
  
 
-    const sql = `INSERT INTO ANAG_AZIENDA (nome, cognome, indirizzo, cap, dataNascita, telefono, cellulare, email, pec, cf, p_iva) 
-    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`;
-    const params = [
-      req.nome,
-      req.cognome,
-      req.indirizzo,
-      req.cap,
-      req.dataNascita,
-      req.telefono,
-      req.cellulare,
-      req.email,
-      req.pec,
-      req.cf,
-      req.p_iva
-    ];
-    db.run(sql, params, function (err) {
-      if (err) {
-        console.error('Errore SQL:', err);
-        reject(err);
-      } else {
-        resolve({ id: this.lastID });
-      }
-    });
+//     const sql = `INSERT INTO ANAG_AZIENDA (nome, cognome, indirizzo, cap, dataNascita, telefono, cellulare, email, pec, cf, p_iva) 
+//     VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`;
+//     const params = [
+//       req.nome,
+//       req.cognome,
+//       req.indirizzo,
+//       req.cap,
+//       req.dataNascita,
+//       req.telefono,
+//       req.cellulare,
+//       req.email,
+//       req.pec,
+//       req.cf,
+//       req.p_iva
+//     ];
+//     db.run(sql, params, function (err) {
+//       if (err) {
+//         console.error('Errore SQL:', err);
+//         reject(err);
+//       } else {
+//         resolve({ id: this.lastID });
+//       }
+//     });
   
-  });
-};
-const insertDocumento = (req,idAnagrafica) => {
+//   });
+// };
+// const insertDocumento = (req,idAnagrafica) => {
 
-   return new Promise((resolve, reject) => {
+//    return new Promise((resolve, reject) => {
     
- for(var x = 0 ; x < req.length; x++){
-   const sql = `INSERT INTO DOCUMENTI (fk_id, tipologia, num_doc) 
-                 VALUES (?, ?, ?)`;
-    const params = [
-      idAnagrafica,
-      req[x].tipologia,
-      req[x].num_doc
-    ];
-    db.run(sql, params, function (err) {
-      if (err) {
-        reject(err);
-      } else {
-        resolve({ id: this.lastID });
-      }
-    });
-  }
-  });
-};
+//  for(var x = 0 ; x < req.length; x++){
+//    const sql = `INSERT INTO DOCUMENTI (fk_id, tipologia, num_doc) 
+//                  VALUES (?, ?, ?)`;
+//     const params = [
+//       idAnagrafica,
+//       req[x].tipologia,
+//       req[x].num_doc
+//     ];
+//     db.run(sql, params, function (err) {
+//       if (err) {
+//         reject(err);
+//       } else {
+//         resolve({ id: this.lastID });
+//       }
+//     });
+//   }
+//   });
+// };
 
 const postFillPdf = async (req,res) => {
     try {
