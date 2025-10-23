@@ -3,7 +3,8 @@ const express = require('express');
 const path = require('path');
 const app = express();
 const PORT = process.env.PORT || 4000;
-const { getAnag_Azienda, getAnag_AziendaById, getDocumentiById,postFillPdf, insertAnagrafica, insertDocumento, createAnagraficaConDocumenti} = require('./srv');
+// const { getAnag_Azienda, getAnag_AziendaById, getDocumentiById,postFillPdf, insertAnagrafica, insertDocumento, createAnagraficaConDocumenti} = require('./srv');
+const { postFillPdf} = require('./srv');
 
 app.use(express.static(path.join(__dirname, 'webapp')));
 app.use('/resources',express.static(path.join(__dirname, 'webapp')));
