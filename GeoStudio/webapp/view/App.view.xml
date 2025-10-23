@@ -1,0 +1,60 @@
+<mvc:View
+    controllerName="GeoStudio.controller.App"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:f="sap.f"
+    xmlns:card="sap.f.cards"
+    xmlns="sap.m"
+    displayBlock="true"
+>
+    <App id="app">
+        <Page title="GeoStudio">
+            <content>
+                <IconTabBar>
+                    	<items>
+
+                        
+                    	<IconTabFilter text="Deleghe">
+
+                            <f:Card
+                                class="sapUiMediumMargin"
+                                width="300px"
+                            >
+                                <f:header>
+                                    <card:Header
+                                        title="Delega Condono"
+                                        iconSrc="sap-icon://document-text"
+                                    />
+                                </f:header>
+                                <f:content>
+                                    <OverflowToolbar width="100%">
+                                        <ToolbarSpacer ></ToolbarSpacer>
+                                        <Button press="onNavToMain" text="Compila" />
+                                    </OverflowToolbar>
+                                </f:content>
+                            </f:Card>
+
+                            <f:Card
+                                class="sapUiMediumMargin"
+                                width="300px"
+                            >
+                                <f:header>
+                                    <card:Header
+                                        title="Delega Generica"
+                                        iconSrc="sap-icon://document-text"
+                                    />
+                                </f:header>
+                                <f:content>
+                                    <OverflowToolbar width="100%">
+                                        <ToolbarSpacer ></ToolbarSpacer>
+                                        <Button press="onNavToMain" text="Compila" />
+                                    </OverflowToolbar>
+                                </f:content>
+                            </f:Card>
+
+                        </IconTabFilter>
+                    </items>
+                </IconTabBar>
+            </content>
+        </Page>
+    </App>
+</mvc:View>

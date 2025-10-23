@@ -1,0 +1,49 @@
+{
+    "_version": "1.12.0",
+    "sap.app": {
+        "id": "GeoStudio",
+        "type": "application"
+       
+    },
+    "sap.ui5": {
+       
+        "rootView": {
+            "viewName": "GeoStudio.view.App",
+            "type": "XML",
+            "async": true,
+            "id": "app"
+        },
+        "routing": {
+            "config": {
+                "routerClass": "sap.m.routing.Router",
+                "viewType": "XML",
+                "viewPath": "GeoStudio/view",
+                "controlId": "app",
+                "controlAggregation": "pages",
+                "async": true
+            },
+            "routes": [
+                {
+                    "pattern": "",
+                    "name": "app",
+                    "target": "app"
+                },
+                {
+                    "pattern": "main",
+                    "name": "main",
+                    "target": "main"
+                }
+            ],
+            "targets": {
+                "app": {
+                    "viewName": "App",
+                    "viewLevel": 1
+                },
+                "main": {
+                    "viewName": "Main",
+                    "viewLevel": 2
+                }
+            }
+        }
+    }
+}

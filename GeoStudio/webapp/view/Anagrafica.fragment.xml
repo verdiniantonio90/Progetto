@@ -1,0 +1,31 @@
+<core:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:core="sap.ui.core">
+	<!-- <Dialog>
+		<Text text="prova"></Text> 
+	</Dialog> -->
+		<SelectDialog
+		noDataText="No Products Found"
+		title="Select Product"
+		search=".onSearch"
+		searchPlaceholder="Search Products"
+		confirm=".onValueHelpDialogClose"
+		cancel=".onValueHelpDialogClose"
+		showClearButton="true"
+		items="{
+			path: 'ANAGRAFICA>/',
+			sorter: {
+				path: 'cognome',
+				descending: false
+			}
+		}">
+		<StandardListItem
+			selected="{selected}"
+			title="{ANAGRAFICA>nome} {ANAGRAFICA>cognome} "/>
+			<!-- description="{ProductId}"
+			icon="{ProductPicUrl}"
+			iconDensityAware="false"
+			iconInset="false"
+			type="Active" -->
+	</SelectDialog>
+</core:FragmentDefinition>

@@ -1,0 +1,323 @@
+<mvc:View
+    controllerName="GeoStudio.controller.Main"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:core="sap.ui.core"
+    xmlns="sap.m"
+    xmlns:f="sap.ui.layout.form"
+    displayBlock="true"
+>
+    <Page
+        title="Delega Condono"
+        floatingFooter="true"
+        titleAlignment="Center"
+        showNavButton="true"
+        navButtonPress="onNavBack"
+    >
+        <Panel headerText="Dati Delegato">
+            <content>
+                <VBox>
+                    <f:SimpleForm
+                        editable="true"
+                        layout="ResponsiveGridLayout"
+                        labelSpanL="4"
+                        labelSpanM="4"
+                        emptySpanL="0"
+                        emptySpanM="0"
+                        columnsXL="2"
+                        columnsL="2"
+                        columnsM="2"
+                    >
+                        <f:content>
+                            <core:Title text="" />
+                            <Label text="il sottoscritto" />
+                            <Input
+                                value="{/sottoscritto}"
+                                placeholder="Nome e Cognome"
+                                valueHelpOnly="false"
+                                valueHelpRequest="onOpenAnagrafica"
+                                showValueHelp="true"
+                            />
+
+                            <Label text="nato il" />
+                            <DatePicker
+                                value="{/dataNascita}"
+                                placeholder="gg/mm/aaaa"
+                                displayFormat="dd/MM/yyyy"
+                            />
+
+                            <Label text="a" />
+                            <Input
+                                value="{/luogoNascita}"
+                                placeholder="Luogo di nascita"
+                            />
+
+                            <Label text="codice fiscale" />
+                            <Input
+                                value="{/codiceFiscale}"
+                                placeholder="Codice Fiscale"
+                            />
+
+                            <Label text="Telefono" />
+                            <Input
+                                value="{/telefono}"
+                                placeholder="Telefono"
+                            />
+
+                            <Label text="Cellulare" />
+                            <Input
+                                value="{/cellulare}"
+                                placeholder="Cellulare"
+                            />
+
+                            <Label text="E-Mail" />
+                            <Input
+                                value="{/email}"
+                                placeholder="E-Mail"
+                            />
+
+                            <Label text="Residente in" />
+                            <Input
+                                value="{/residenza}"
+                                placeholder="Residente in (città)"
+                            />
+                            <core:Title text="" />
+                            <Label text="Via/Piazza" />
+                            <Input
+                                value="{/indirizzo}"
+                                placeholder="Via/Piazza"
+                            />
+
+                            <Label text="CAP" />
+                            <Input
+                                value="{/cap}"
+                                placeholder="CAP"
+                            />
+
+                            <Label
+                                text="status es (Proprietario, comproprietario, titolare di altro interesse diretto, concreto e attuale, tecnico incaricato.)"
+                            />
+                            <Input
+                                value="{/status}"
+                                placeholder="Status"
+                            />
+
+                            <Label text="dichiaro di essere" />
+                            <Input
+                                value="{/dichiarazione}"
+                                placeholder="Dichiarazione"
+                            />
+
+                            <Label text="Numero richiesta di condono" />
+                            <Input
+                                value="{/numeroRichiesta}"
+                                placeholder="Numero richiesta di condono"
+                            />
+
+                            <Label text="Data della richiesta" />
+                            <DatePicker
+                                value="{/dataRichiesta}"
+                                placeholder="gg/mm/aaaa"
+                                displayFormat="dd/MM/yyyy"
+                            />
+
+                            <Label text="tipo e N. Documento" />
+                            <HBox renderType="Bare">
+                                <Input
+                                    width="30%"
+                                    value="{doc>/tipo}"
+                                    placeholder="Tipo"
+                                />
+                                <Input
+                                    width="70%"
+                                    value="{doc>/ndoc}"
+                                    placeholder="N. Documento"
+                                />
+                            </HBox>
+
+                            <Label text="PEC" />
+                            <Input
+                                value="{/pec}"
+                                placeholder="PEC"
+                            />
+                        </f:content>
+                    </f:SimpleForm>
+                </VBox>
+            </content>
+        </Panel>
+        <Panel headerText="Dati Delegante">
+            <content>
+                <VBox>
+                    <f:SimpleForm
+                        editable="true"
+                        layout="ResponsiveGridLayout"
+                        labelSpanL="4"
+                        labelSpanM="4"
+                        emptySpanL="0"
+                        emptySpanM="0"
+                        columnsXL="2"
+                        columnsL="2"
+                        columnsM="2"
+                    >
+                        <f:content>
+                            <core:Title text="" />
+                            <Label text="Nome e Cognome" />
+                            <Input
+                                value="{/delegato_nome}"
+                                placeholder="Nome e Cognome"
+                            />
+
+                            <Label text="nato il" />
+                            <DatePicker
+                                value="{/delegato_nato_il}"
+                                placeholder="gg/mm/aaaa"
+                                displayFormat="dd/MM/yyyy"
+                            />
+
+                            <Label text="a" />
+                            <Input
+                                value="{/delegato_luogo}"
+                                placeholder="Luogo di nascita"
+                            />
+
+                            <Label text="codice fiscale" />
+                            <Input
+                                value="{/delegato_cf}"
+                                placeholder="Codice Fiscale"
+                            />
+
+                            <Label text="Residente a" />
+                            <Input
+                                value="{/delegato_residente}"
+                                placeholder="Residente in (città)"
+                            />
+
+                            <core:Title text="" />
+                            <Label text="CAP" />
+                            <Input
+                                value="{/cap}"
+                                placeholder="CAP"
+                            />
+
+                            <Label text="Via/Piazza" />
+                            <Input
+                                value="{/indirizzo}"
+                                placeholder="Via/Piazza"
+                            />
+
+                            <Label text="tipo e N. Documento" />
+                            <HBox renderType="Bare">
+                                <Input
+                                    width="30%"
+                                    value="{doc>/delegato_tipo}"
+                                    placeholder="Tipo"
+                                />
+                                <Input
+                                    width="70%"
+                                    value="{doc>/delegato_ndoc}"
+                                    placeholder="N. Documento"
+                                />
+                            </HBox>
+
+                            <Label text="E-Mail" />
+                            <Input
+                                value="{/delegato_email}"
+                                placeholder="E-Mail"
+                            />
+
+                            <Label text="PEC" />
+                            <Input
+                                value="{/delegato_pec}"
+                                placeholder="PEC"
+                            />
+                        </f:content>
+                    </f:SimpleForm>
+                </VBox>
+            </content>
+        </Panel>
+        <Panel headerText="Tipo Richiesta">
+            <content>
+                <VBox>
+                    <f:SimpleForm
+                        editable="true"
+                        layout="ResponsiveGridLayout"
+                        labelSpanL="4"
+                        labelSpanM="4"
+                        emptySpanL="0"
+                        emptySpanM="0"
+                        columnsXL="2"
+                        columnsL="2"
+                        columnsM="2"
+                    >
+                        <f:content>
+                            <core:Title text="" />
+                          
+                            <Label text="Presentare documentazione"></Label>
+                            <Switch
+                                    state="{/presentare}"
+                                    customTextOn=" "
+                                    customTextOff=" "
+                                    
+                                >
+                                    <layoutData>
+                                        <FlexItemData growFactor="1" />
+                                    </layoutData>
+                                </Switch>
+                                
+                                <Label text="Richiede copie semplici e/o conformi"></Label>
+                                <Switch
+                                    state="{/richiedeCopie}"
+                                    customTextOn=" "
+                                    customTextOff=" "
+                                >
+                                    <layoutData>
+                                        <FlexItemData growFactor="1" />
+                                    </layoutData>
+                                </Switch>
+
+                                <Label text="Ritirare il provvedimento di concessione edilizia in sanatoria"></Label>
+                                <Switch
+                                    state="{/ritirare}"
+                                    customTextOn=" "
+                                    customTextOff=" "
+                                    enabled="true"
+                                >
+                                    <layoutData>
+                                        <FlexItemData growFactor="1" />
+                                    </layoutData>
+                                </Switch>
+
+                                 <Label text="altro"></Label>
+                            <HBox renderType="Bare" width="50%">
+                                <Switch
+                                state="{/altro}"
+                                customTextOn=" "
+                                customTextOff=" "
+                                enabled="true"
+                                >
+                                <layoutData>
+                                    <FlexItemData growFactor="1" />
+                                </layoutData>
+                            </Switch>
+                             <Input class="sapUiTinyMarginBegin" value="{/altro_specifica}"></Input>
+                            </HBox>
+                        </f:content>
+                    </f:SimpleForm>
+                </VBox>
+            </content>
+        </Panel>
+        <footer>
+            <Toolbar>
+                <Label text="Data"></Label>
+                <DatePicker  width="20%" value="{/data}"
+                placeholder="gg/mm/aaaa"
+                displayFormat="dd/MM/yyyy"></DatePicker>
+                <ToolbarSpacer />
+                <Button
+                    type="Accept"
+                    press="onGeneraPdf"
+                    text="genera pdf"
+                />
+            </Toolbar>
+        </footer>
+    </Page>
+</mvc:View>
