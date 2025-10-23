@@ -2,10 +2,11 @@ sap.ui.define([
     "sap/ui/core/mvc/Controller",
     "sap/m/MessageToast",
     "sap/ui/model/json/JSONModel",
-    'sap/ui/core/Fragment'
-], function (Controller, MessageToast, JSONModel, Fragment) {
+    'sap/ui/core/Fragment',
+    "./BaseController"
+], function (Controller, MessageToast, JSONModel, Fragment,BaseController) {
     "use strict";
-    return Controller.extend("GeoStudio.controller.Main", {
+    return BaseController.extend("GeoStudio.controller.Main", {
         onInit: function () {
             var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
             // Attacca l'event handler alla route "detail"
@@ -13,6 +14,7 @@ sap.ui.define([
 
         },
         _onMainMatched: function () {
+        
             var oModelDoc = new JSONModel({ tipo: "", ndoc: "", delegato_tipo: "", delegato_ndoc: "" });
             this.getView().setModel(oModelDoc, "doc");
             var oModel = new JSONModel({
@@ -101,7 +103,6 @@ sap.ui.define([
             // });
         },
         onOpenAnagrafica: function () {
-
             $.ajax({
                 method: 'GET',
                 url: 'http://localhost:4000/AnagraficaSet',
@@ -110,19 +111,90 @@ sap.ui.define([
                 success: function (oResponse) {
                     debugger;
 
-                    this.getView().getModel("ANAGRAFICA").setData(oResponse.data);
+                    oResponse.data ? this.getView().getModel("ANAGRAFICA").setData(oResponse.data) : this.getView().getModel("ANAGRAFICA").setData([]);
                 }.bind(this),
                 error: function (oError) {
 
 
                 }.bind(this)
-
             });
-            if (!this._pDialog) {
-                this._pDialog = sap.ui.xmlfragment("GeoStudio.view.Anagrafica", this);
-                this.getView().addDependent(this._pDialog);
+           this.openDialog("Anagrafica");
+        },
+        onSalva: function (oEvent) {
+
+        },
+        onEdit: function (oEvent) {
+            var oSource = oEvent.getSource();
+            var oContext = oSource.getBindingContext("ANAGRAFICA")
+            var id = oContext.sPath.replace('/','')
+            var oTable = sap.ui.getCore().byId("Tb_anag").getItems()[id]
+            var cells = oTable.getCells() 
+            if(oSource.getIcon() === 'sap-icon://save'){
+                MessageToast.show("salvato")
+            };
+            for(var i = 0 ; i < cells.length; i++){
+                var items = cells[i].getItems();
+                for(var x = 0 ; x < items.length;x++){
+                    if(items[x].setEditable !== undefined){
+                        oSource.getIcon() === 'sap-icon://edit'  ? items[x].setEditable(true) : items[x].setEditable(false);
+                    };
+                };
+            };
+            oSource.getIcon() === 'sap-icon://edit' ? oSource.setIcon('sap-icon://save') : oSource.setIcon('sap-icon://edit');
+
+        },
+        onClose : function(oEvent,nomeDialog, id){
+            this.closeDialog(nomeDialog,id)
+        },
+        onDelete: function (oEvent) {
+
+        },
+        onDetail: function (oEvent) { 
+            var oSource = oEvent.getSource();
+            var oContext = oSource.getBindingContext("ANAGRAFICA")
+            var headers={id:oContext.getObject().id};
+            this.read("http://localhost:4000/DocById",headers,'DOCUMENTI');
+            this.openDialog("Documenti");
+        },
+        onAdd: function(oEvent){
+
+            var oData ={
+                "id": "",
+                "nome": "",
+                "cognome": "",
+                "indirizzo": "",
+                "cap": "",
+                "dataNascita": "",
+                "telefono": "",
+                "cellulare": "",
+                "email": "",
+                "pec": "",
+                "cf": "",
+                "p_iva": ""
+                }
+            
+            this.getView().getModel("insAnag").setData(oData);
+           
+            this.getView().getModel("insDoc").setData([]);
+            
+            this.openDialog('InsertAnagrafica');
+        },
+        onInsert : function(oEvent,sDialog){
+            switch(sDialog){
+                case "insAnag":
+                    debugger
+                    var oEntry = this.getView().getModel("insAnag").getData();
+                    var oEntryDoc = this.getView().getModel("insDoc").getData();
+                    this.createAnagraficaDoc(oEntry,oEntryDoc);
+                break;                
             }
-            this._pDialog.open();
+        },
+        onAddDoc : function(oEvent){
+            debugger
+            var oData = {fk_id:"",tipologia:"",num_doc:""};
+            this.getView().getModel("insDoc").getData().push(oData);
+            this.getView().getModel("insDoc").refresh();
+
         }
 
     });

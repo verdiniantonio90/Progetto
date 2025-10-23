@@ -1,0 +1,63 @@
+<core:FragmentDefinition
+    xmlns="sap.m"
+    xmlns:core="sap.ui.core"
+>
+<Dialog id="insAnag" type="Message" title="Inserimento Utente">
+<VBox >
+    
+	<Input required="true" value="{insAnag>/nome}"  placeholder="Nome"></Input>
+	<Input value="{insAnag>/cognome}"  placeholder="Cognome"></Input>
+	<DatePicker value="{insAnag>/dataNascita}" placeholder="Data Nascita" displayFormat="dd/MM/yyyy"></DatePicker>
+	<Input value="{insAnag>/cf}" maxLength="16"  placeholder="Cod. Fiscale"></Input>
+	<Input value="{insAnag>/indirizzo}"  placeholder="Indirizzo"></Input>
+    <Input value="{insAnag>/cap}" maxLength="5"  placeholder="Cap"></Input>
+    <Input value="{insAnag>/telefono}"   placeholder="Telefono"></Input>
+    <Input value="{insAnag>/cellulare}"   placeholder="Cellulare"></Input>					
+	<Input value="{insAnag>/email}"  placeholder="E-Mail"></Input>
+	<Input value="{insAnag>/pec}"   placeholder="Pec"></Input>
+    <Input value="{insAnag>/p_iva}" maxLength="11"   placeholder="P.IVA"></Input>
+	 <Table id="In_doc" items="{insDoc>/}" alternateRowColors="true" >
+			<headerToolbar>
+				<OverflowToolbar>
+					<Title text="Tabella Documenti"></Title>
+					<ToolbarSpacer ></ToolbarSpacer>
+					<Button type="Emphasized" icon="sap-icon://add" press="onAddDoc"></Button>
+				</OverflowToolbar>
+			</headerToolbar>
+            <columns>
+                <Column  hAlign="Center">
+                    <Text text="Tipologia" />
+                </Column>
+				 <Column   hAlign="Center">
+                    <Text text="Numero Documento" />
+                </Column>
+			
+				
+				 <Column width="5em" demandPopin="true"    hAlign="Center" minScreenWidth="XXLarge">
+                    <Text text="" />
+                </Column>
+                 <Column width="5em" demandPopin="true"    hAlign="Center" minScreenWidth="XXLarge">
+                    <Text text="" />
+                </Column>
+            </columns>
+            <items>
+					<ColumnListItem vAlign="Middle">
+						<cells>
+							
+								<Input value="{insDoc>tipologia}"  editable="false" placeholder="E-Mail"></Input>
+								<Input value="{insDoc>num_doc}"  editable="false" placeholder="Pec"></Input>
+                                <Button icon="sap-icon://edit" type="Accept"  press="onEditDocRow"></Button>
+                                <Button icon="sap-icon://delete" type="Accept"  press="onEditDeleteRow"></Button>
+						</cells>
+					</ColumnListItem>
+			</items>
+        </Table>					
+</VBox>
+	<beginButton>
+		<Button  text="Chiudi" type="Reject" press="onClose($event,'InsertAnagrafica','insAnag')"></Button>
+	</beginButton>
+	<endButton>
+		<Button text="Salva" type="Accept" press="onInsert($event,'insAnag')"></Button>
+	</endButton>
+</Dialog>
+</core:FragmentDefinition>

@@ -1,0 +1,52 @@
+<core:FragmentDefinition
+    xmlns="sap.m"
+    xmlns:core="sap.ui.core"
+>
+    <Dialog id="doc" title="Anagrafica" contentWidth="50%" state="Information" stretch="false" titleAlignment="Center">
+        <Table id="Tb_doc" items="{DOCUMENTI>/}"  alternateRowColors="true">
+			<headerToolbar>
+				<OverflowToolbar>
+					<Title text="Tabella Documenti"></Title>
+					<ToolbarSpacer ></ToolbarSpacer>
+					<Button type="Emphasized" icon="sap-icon://add" press="onAdd"></Button>
+				</OverflowToolbar>
+			</headerToolbar>
+            <columns>
+                <Column  hAlign="Center">
+                    <Text text="Tipologia" />
+                </Column>
+				 <Column   hAlign="Center">
+                    <Text text="Numero Documento" />
+                </Column>
+			
+				
+				 <Column width="5em" demandPopin="true"    hAlign="Center" minScreenWidth="XXLarge">
+                    <Text text="" />
+                </Column>
+                 <Column width="5em" demandPopin="true"    hAlign="Center" minScreenWidth="XXLarge">
+                    <Text text="" />
+                </Column>
+            </columns>
+            <items>
+					<ColumnListItem vAlign="Middle">
+						<cells>
+							
+								<Input value="{DOCUMENTI>tipologia}"  editable="false" placeholder="E-Mail"></Input>
+								<Input value="{DOCUMENTI>num_doc}"  editable="false" placeholder="Pec"></Input>
+                                <Button icon="sap-icon://edit" type="Accept"  press="onEditDocRow"></Button>
+                                <Button icon="sap-icon://delete" type="Accept"  press="onEditDeleteRow"></Button>
+						</cells>
+					</ColumnListItem>
+			</items>
+        </Table>
+	
+
+			<beginButton>
+				<Button  text="chiudi" press="onClose($event,'Documenti','doc')"></Button>
+			</beginButton>
+			<endButton>
+				<Button text="salva" type="Accept"  press="onInsert($event,'doc')"></Button>
+			</endButton>
+	
+    </Dialog>
+</core:FragmentDefinition>

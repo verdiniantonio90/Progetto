@@ -9,10 +9,9 @@ sap.ui.define([
             this.getOwnerComponent().getRouter().initialize();
         },
         onNavToMain: function () {
-          
+         
             // Naviga alla rotta "main"
             this.getOwnerComponent().getRouter().navTo("main");
-          
         }
     });
 });
